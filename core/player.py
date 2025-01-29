@@ -6,9 +6,14 @@ class Player:
         self.properties = []
         self.is_jail = False
 
-    def move(self, steps) -> None:
-        pass
+    def move(self, steps: int) -> None:
+        self.position = (self.position + steps) % 40
 
     def pay(self, amount: int, recipient=None) -> bool:
-        pass
+        if self.money < amount:
+            return False
+        self.money -= amount
+        if recipient:
+            recipient.money += amount
+        return True
 
